@@ -1,0 +1,44 @@
+Simple line-oriented config file parser.
+
+
+Comment lines have a hash "#" as initial non-white-space token
+	|# This is a comment line
+	|  # This comment line has initial white space.
+	|tag # this is not a comment!
+
+Empty lines, white-space only or comment lines, are ignored.
+
+
+tag lines
+<tag> <ws> <val> <ws> <val> <ws> <val> <EOL>
+
+E.G.
+	# Comment line
+	# abc is a tag, def is the argument
+	abc def
+	# 3 arguments
+	xyzzy 1 2 3
+
+In main program:
+	#include <cfgf.h>
+	int func_abc(int argc, const char** argv) {
+	   ...
+	   return 0;
+	}
+	int func_xyzzy(int argc, const char** argv) {
+	   ...
+	   return 0;
+	}
+	cfgf_tagtab_t tab[] = {
+		{ "abc", 1, func_abc },
+		{ "xyzzy", 3, func_xyzzy },
+		{ 0,0,0 } /* Terminator*/
+	};
+
+	int main()
+	{
+	  if ( cfgf_read_file( config_file_name, tab) )
+	    fprintf(stderr,"Bad config file\n");
+	}
+
+
