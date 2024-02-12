@@ -8,8 +8,8 @@
  * Created On      : Mon Feb 12 18:31:01 2024
  * 
  * Last Modified By: Mats Bergstrom
- * Last Modified On: Mon Feb 12 18:40:32 2024
- * Update Count    : 7
+ * Last Modified On: Mon Feb 12 22:17:21 2024
+ * Update Count    : 12
  */
 
 #include <stdio.h>
@@ -57,6 +57,7 @@ cfgf_chomp(char* s)
     }
 }
 
+
 static int
 cfgf_parse_line(char* s,  const cfgf_tagtab_t* tab)
 {
@@ -95,8 +96,6 @@ cfgf_parse_line(char* s,  const cfgf_tagtab_t* tab)
 	++argc;
 
 	if ( argc > tab[n].argc ) {
-	    if ( *e )
-		return -1;
 	    break;
 	}
 
