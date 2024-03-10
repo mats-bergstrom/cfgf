@@ -8,8 +8,8 @@
  * Created On      : Mon Feb 12 18:31:01 2024
  * 
  * Last Modified By: Mats Bergstrom
- * Last Modified On: Mon Feb 12 22:17:21 2024
- * Update Count    : 12
+ * Last Modified On: Sun Mar 10 17:20:59 2024
+ * Update Count    : 14
  */
 
 #include <stdio.h>
@@ -129,7 +129,11 @@ cfgf_read_file(const char* cfg, const cfgf_tagtab_t* tab)
     FILE* f = fopen(cfg,"r");
     unsigned int n = 0;
     int i;
-    while ( f && !feof(f) ) {
+    if ( !f ) {
+	printf("Unable to open config file: \"%s\"\n",cfg);
+	return -1;
+    }
+    while ( !feof(f) ) {
 	char* s = fgets( cfgf_fbuf, CFGF_FBUF_MAX-1, f );
 	if ( !s )
 	    break;
